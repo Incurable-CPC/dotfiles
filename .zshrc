@@ -106,10 +106,10 @@ alias clear-color="sed -r \"s/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g\""
 
 alias del-log="find -name \"*.log*\" | xargs -r rm"
 alias find-exe="find -type f -perm -744 | egrep -v '.sh$'"
-#alias update-proto="$HOME/p4/update_proto.sh"
-alias create-module="$LOCAL/templates/create_module.sh"
-alias create-color_coded="$LOCAL/templates/create_color_coded.sh"
-alias update-iplist="$LOCAL/templates/update_iplist.sh"
+# alias update-proto="$HOME/p4/update_proto.sh"
+# alias create-module="$LOCAL/templates/create_module.sh"
+# alias create-color_coded="$LOCAL/templates/create_color_coded.sh"
+# alias update-iplist="$LOCAL/templates/update_iplist.sh"
 
 alias nuget="mono /usr/local/bin/nuget.exe"
 alias kubedev="kubectl --kubeconfig=$HOME/.kube/dev_config -n private-server"
@@ -119,7 +119,7 @@ alias helmdev="helm --kubeconfig $HOME/.kube/dev_config -n private-server"
 # alias svn="luit -encoding gbk svn"
 setopt complete_aliases
 
-alias -g E="| gbk2utf8.sh"
+alias -g E="| gbk2utf8"
 alias -g C="| cut -c -$COLUMNS"
 alias -g EL="E L"
 alias -g LL="C L"

@@ -105,28 +105,28 @@ set nocsverb
 cs add cscope.out
 set csverb
 
-function! CscopeBuildCB(channel)
-    cs reset
-endfunction
-
-function! CscopeBuild()
-    call system('find . | egrep "\.(c|h|cc|cpp)$" > cscope.files')
-    call job_start('cscope -bq', {
-                \ 'close_cb': 'CscopeBuildCB'
-                \ })
-endfunction
-
-noremap <F5> :call CscopeBuild()<CR>
-
-nnoremap <C-]> :cscope find g  <C-R>=expand('<cword>')<CR><CR>
-nnoremap <buffer> <leader>cs :cscope find s  <C-R>=expand('<cword>')<CR><CR>
-nnoremap <buffer> <leader>cg :cscope find g  <C-R>=expand('<cword>')<CR><CR>
-nnoremap <buffer> <leader>cc :cscope find c  <C-R>=expand('<cword>')<CR><CR>
-nnoremap <buffer> <leader>ct :cscope find t  <C-R>=expand('<cword>')<CR><CR>
-nnoremap <buffer> <leader>ce :cscope find e  <C-R>=expand('<cword>')<CR><CR>
-nnoremap <buffer> <leader>cf :cscope find f  <C-R>=expand('<cfile>')<CR><CR>
-nnoremap <buffer> <leader>ci :cscope find i ^<C-R>=expand('<cfile>')<CR>$<CR>
-nnoremap <buffer> <leader>cd :cscope find d  <C-R>=expand('<cword>')<CR><CR>
+" function! CscopeBuildCB(channel)
+"     cs reset
+" endfunction
+" 
+" function! CscopeBuild()
+"     call system('find . | egrep "\.(c|h|cc|cpp)$" > cscope.files')
+"     call job_start('cscope -bq', {
+"                 \ 'close_cb': 'CscopeBuildCB'
+"                 \ })
+" endfunction
+" 
+" noremap <F5> :call CscopeBuild()<CR>
+" 
+" nnoremap <C-]> :cscope find g  <C-R>=expand('<cword>')<CR><CR>
+" nnoremap <buffer> <leader>cs :cscope find s  <C-R>=expand('<cword>')<CR><CR>
+" nnoremap <buffer> <leader>cg :cscope find g  <C-R>=expand('<cword>')<CR><CR>
+" nnoremap <buffer> <leader>cc :cscope find c  <C-R>=expand('<cword>')<CR><CR>
+" nnoremap <buffer> <leader>ct :cscope find t  <C-R>=expand('<cword>')<CR><CR>
+" nnoremap <buffer> <leader>ce :cscope find e  <C-R>=expand('<cword>')<CR><CR>
+" nnoremap <buffer> <leader>cf :cscope find f  <C-R>=expand('<cfile>')<CR><CR>
+" nnoremap <buffer> <leader>ci :cscope find i ^<C-R>=expand('<cfile>')<CR>$<CR>
+" nnoremap <buffer> <leader>cd :cscope find d  <C-R>=expand('<cword>')<CR><CR>
 
 nnoremap <leader>k :e %:r.cc<CR>
 nnoremap <leader>j :e %:r.h<CR>
@@ -223,6 +223,7 @@ func s:CustomShowDiagnostics()
     YcmDiags
 endfunc
 command! CustomYcmDiags call s:CustomShowDiagnostics()
+noremap <F3> ::YcmRestartServer<CR>
 noremap <F4> :CustomYcmDiags<CR>
 
 " echodoc.vim
