@@ -203,7 +203,7 @@ let MY_YCM_HIGHLIGHT_GROUP = {
             \   'parameter': 'Normal',
             \   'variable': 'Normal',
             \   'property': 'Member',
-            \   'enumMember': 'Normal',
+            \   'enumMember': 'Constant',
             \   'event': 'Special',
             \   'member': 'Member',
             \   'method': 'Method',
