@@ -128,7 +128,7 @@ set csverb
 " nnoremap <buffer> <leader>ci :cscope find i ^<C-R>=expand('<cfile>')<CR>$<CR>
 " nnoremap <buffer> <leader>cd :cscope find d  <C-R>=expand('<cword>')<CR><CR>
 
-nnoremap <leader>k :e %:r.cc<CR>
+nnoremap <leader>k :e %:r.c<CR>
 nnoremap <leader>j :e %:r.h<CR>
 
 nnoremap <C-L> :nohlsearch<CR>:diffupdate<CR>:syntax sync fromstart<CR><C-L>
@@ -176,15 +176,16 @@ let g:go_highlight_parens = 0
 
 " YouCompleteMe
 " let g:ycm_show_diagnostics_ui = 0
-let g:ycm_clangd_binary_path = '/usr/bin/clangd'
+let g:ycm_clangd_binary_path = exepath('clangd')
 let g:ycm_auto_hover = ''
 let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_clangd_uses_ycmd_caching = 0
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
 let g:ycm_log_level = 'info'
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings = 1
-let g:ycm_clangd_args=['--header-insertion=never']
+let g:ycm_clangd_args=['--header-insertion=never', '-pretty']
 let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_semantic_triggers =  {
             \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
@@ -216,14 +217,21 @@ for tokenType in keys( MY_YCM_HIGHLIGHT_GROUP )
                 \ { 'highlight': MY_YCM_HIGHLIGHT_GROUP[ tokenType ] } )
 endfor
 
-func s:CustomShowDiagnostics()
+func s:CustomYcmShowDiagnostics()
     if (youcompleteme#GetErrorCount() == 0)
         lclose
     endif
     YcmDiags
 endfunc
-command! CustomYcmDiags call s:CustomShowDiagnostics()
-noremap <F3> ::YcmRestartServer<CR>
+command! CustomYcmDiags call s:CustomYcmShowDiagnostics()
+
+func s:CustomYcmRestartServer()
+    call system('rm core.[0-9]*')
+    YcmRestartServer
+endfunc
+command! CustomYcmRestartSvr call s:CustomYcmRestartServer()
+
+noremap <F3> :CustomYcmRestartSvr<CR>
 noremap <F4> :CustomYcmDiags<CR>
 
 " echodoc.vim

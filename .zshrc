@@ -125,7 +125,7 @@ alias -g EL="E L"
 alias -g LL="C L"
 
 simplify-log() { sed -u 's/^.*\['$1'd\][^]]*\] //' }
-tail-log() { tail -f $1/log/$1* | egrep --line-buffered $2 | simplify-log $1 }
+tail-log() { tail -f $1/log/$1* | egrep --line-buffered --text $2 | simplify-log $1 }
 
 
 function _reset-prompt-and-accept-line {
